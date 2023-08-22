@@ -2,6 +2,7 @@ version: '2'
 services:
   zookeeper:
     image: confluentinc/cp-zookeeper:latest
+    container_name: zookeeper
     environment:
       ZOOKEEPER_CLIENT_PORT: 2181
       ZOOKEEPER_TICK_TIME: 2000
@@ -10,6 +11,7 @@ services:
   
   kafka:
     image: confluentinc/cp-kafka:latest
+    container_name: kafka
     depends_on:
       - zookeeper
     ports:
@@ -24,6 +26,7 @@ services:
       
   spark:
     image: docker.io/bitnami/spark:latest
+    container_name: spark
     environment:
       - SPARK_MODE=master
       - SPARK_RPC_AUTHENTICATION_ENABLED=no
@@ -35,6 +38,7 @@ services:
       - '8080:8080'
   spark-worker:
     image: docker.io/bitnami/spark:latest
+    container_name: spark-worker
     environment:
       - SPARK_MODE=worker
       - SPARK_MASTER_URL=spark://spark:8080
@@ -48,6 +52,7 @@ services:
 
   jupyter:
     image: jupyter/scipy-notebook:latest
+    container_name: jupyter
     ports:
       - 8888:8888
     volumes:
@@ -55,6 +60,7 @@ services:
 
   trino:
     image: trinodb/trino:latest
+    container_name: trino
     ports:
       - 7070:7070
     environment:
