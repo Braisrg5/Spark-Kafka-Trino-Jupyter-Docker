@@ -16,7 +16,7 @@ To deploy and start the different containers, run:
 
 ## Trino
 
-In order to use Trino CLI is enough with executing the command:
+In order to use the Trino CLI is enough with executing the command:
 
 ```
   docker exec -it trino trino
