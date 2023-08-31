@@ -23,13 +23,13 @@ To deploy and start the different containers, run:
 
 We are using the containers created by sdesilva26, more info about them can be found <a href="https://github.com/sdesilva26/docker-spark/blob/master/TUTORIAL.md">here</a>.
 
-To use Spark, we enter into the container used to submit changes to our worker.
+To use Spark, you need to enter into the container used to submit changes to our worker.
 
 ```
   docker exec -it spark-submit bash
 ```
 
-From within the container we can jump into a scala shell using
+From within the container you can jump into a scala shell using
 
 ```
   $SPARK_HOME/bin/spark-shell --conf spark.executor.memory=1G --conf spark.executor.cores=1 --master spark://spark-master:7077
@@ -37,12 +37,12 @@ From within the container we can jump into a scala shell using
 
 Of course, you can change the memory and cores depending on your machine.
 
-You can now run any jobs you want and they will appear in <a href="http://localhost:4040">http://localhost:4040</a> at the interface.
+You can now run any jobs you want and they will appear in <a href="http://localhost:4040">http://localhost:4040</a> at the interface:
 
 ![image](https://github.com/Braisrg5/Spark-Kafka-Trino-Jupyter-Docker/assets/46173493/d486d04e-0f20-4565-84e2-492837c685aa)
 
 
-To exit the shell we can press CTRL+C and to exit the bash we just write `exit`.
+To exit the shell you can press CTRL+C and to exit the bash you just have to write `exit`.
 
 
 ## Trino
