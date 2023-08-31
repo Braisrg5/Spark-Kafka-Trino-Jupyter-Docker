@@ -45,6 +45,21 @@ You can now run any jobs you want and they will appear in <a href="http://localh
 To exit the shell you can press CTRL+C and to exit the bash you just have to write `exit`.
 
 
+## Jupyter
+
+After doing the compose command, if you want to use Jupyter you need to get into the logs of the container:
+
+```
+  docker logs jupyter
+```
+
+Once you do it, in one of the last lines you will see something like this:
+
+![image](https://github.com/Braisrg5/Spark-Kafka-Trino-Jupyter-Docker/assets/46173493/a89916f7-6ce9-4583-90d0-3ad1b9a0d80b)
+
+Just CTRL+click one of the links and you will be sent to jupyter lab.
+
+
 ## Trino
 
 In order to use the Trino CLI is enough with executing the command:
