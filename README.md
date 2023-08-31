@@ -26,7 +26,7 @@ We are using the containers created by sdesilva26, more info about them can be f
 To use Spark, we enter into the container used to submit changes to our worker.
 
 ```
-  docker exec -it --name spark-submit bash
+  docker exec -it spark-submit bash
 ```
 
 From within the container we can jump into a scala shell using
