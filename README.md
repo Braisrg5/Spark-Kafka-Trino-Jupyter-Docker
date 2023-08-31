@@ -3,6 +3,11 @@
 This is a Docker multi-container environment with Spark, Kafka, Trino and Jupyter Notebook which can be easily deployed and installed.
 
 
+## Docker installation
+
+
+
+
 ## Quick Start
 
 To deploy and start the different containers, run:
@@ -12,6 +17,27 @@ To deploy and start the different containers, run:
 ```
 
 `docker-compose` creates a docker network that can be found by running `docker network list`.
+
+
+## Spark
+
+We are using the containers created by sdesilva26, more info about them can be found <a href="https://github.com/sdesilva26/docker-spark/blob/master/TUTORIAL.md">here</a>.
+
+To use Spark, we enter into the container used to submit changes to our worker.
+
+```
+  docker exec -it --name spark-submit bash
+```
+
+From within the container we can jump into a scala shell using
+
+```
+  $SPARK_HOME/bin/spark-shell --conf spark.executor.memory=1G --conf spark.executor.cores=1 --master spark://spark-master:7077
+```
+
+Of course, you can change the memory and cores depending on your machine.
+
+You can now run any jobs you want and they will appear in <a href="http://localhost:4040">http://localhost:4040</a> at the interface.
 
 
 ## Trino
