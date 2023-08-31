@@ -24,32 +24,40 @@ services:
       KAFKA_INTER_BROKER_LISTENER_NAME: PLAINTEXT
       KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
       
-  spark:
-    image: docker.io/bitnami/spark:latest
+  spark-master:
+    image: docker.io/sdesilva26/spark_master:latest
     container_name: spark
-    environment:
-      - SPARK_MODE=master
-      - SPARK_RPC_AUTHENTICATION_ENABLED=no
-      - SPARK_RPC_ENCRYPTION_ENABLED=no
-      - SPARK_LOCAL_STORAGE_ENCRYPTION_ENABLED=no
-      - SPARK_SSL_ENABLED=no
-      - SPARK_USER=spark
     ports:
       - '8080:8080'
+    networks:
+      - spark-net
+    deploy:
+      placement:
+        constraints:
+          - node.labels.role==master
   spark-worker:
-    image: docker.io/bitnami/spark:latest
+    image: docker.io/sdesilva26/spark_worker:latest
     container_name: spark-worker
+    ports:
+      - '8081:8081'
     environment:
-      - SPARK_MODE=worker
-      - SPARK_MASTER_URL=spark://spark:8080
-      - SPARK_WORKER_MEMORY=1G
-      - SPARK_WORKER_CORES=1
-      - SPARK_RPC_AUTHENTICATION_ENABLED=no
-      - SPARK_RPC_ENCRYPTION_ENABLED=no
-      - SPARK_LOCAL_STORAGE_ENCRYPTION_ENABLED=no
-      - SPARK_SSL_ENABLED=no
-      - SPARK_USER=spark
-
+      - CORES=1
+      - MEMORY=1G
+    deploy:
+      placement:
+        constraints:
+          - node.labels.role==worker
+    networks:
+      - spark-net
+  spark-submit:
+    image: docker.io/sdesilva26/spark_submit:latest
+    container_name: spark-submit
+    ports:
+      - '4040:4040'
+    networks:
+      - spark-net
+    tty: true
+      
   jupyter:
     image: jupyter/scipy-notebook:latest
     container_name: jupyter
@@ -68,3 +76,7 @@ services:
       TRINO_NODE_ENVIRONMENT: production
       TRINO_DISCOVERY_URI: http://trino:8080
       TRINO_DISCOVERY_SERVER_ENABLED: 'true'
+      
+networks:
+  spark-net:
+    name: spark-net
