@@ -39,6 +39,8 @@ Of course, you can change the memory and cores depending on your machine.
 
 You can now run any jobs you want and they will appear in <a href="http://localhost:4040">http://localhost:4040</a> at the interface.
 
+To exit the shell we can press CTRL+C and to exit the bash we just write `exit`.
+
 
 ## Trino
 
