@@ -16,7 +16,7 @@ To deploy and start the different containers, run:
   docker compose up -d
 ```
 
-`docker-compose` creates a docker network that can be found by running `docker network list`.
+`docker compose` creates a docker network (and a Spark network) that can be found by running `docker network ls`.
 
 
 ## Spark
