@@ -69,7 +69,7 @@ Verify that you can run `docker` commands without `sudo`.
 
 ## Quick Start
 
-To pull and start the different containers, run:
+Download the compose.yml file, and save it in your working environment. To pull and start the different containers, run:
 
 ```
   docker compose up -d
@@ -117,9 +117,10 @@ To connect to kafka, get into the container's bash
 
 From here you can use the usual kafka commands such as `kafka-topics`. The server you need to connect to is `localhost:29092`.
 
-Here is an example where we create a topic called "foo" and send it a "Hello world":
+Here is an example where we create a topic called "foo" and send it a "Hello world":ç
+![image](https://github.com/Braisrg5/Spark-Kafka-Trino-Jupyter-Docker/assets/46173493/717034eb-17e5-444c-a7c3-992c2c146f7d)
 
-
+To exit the container, just write `exit`.
 
 
 ## Jupyter
