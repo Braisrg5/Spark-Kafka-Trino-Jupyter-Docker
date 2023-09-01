@@ -79,6 +79,8 @@ The different images will be downloaded from the Docker Hub, installed on your m
 
 `docker compose` creates a docker network (and a Spark network) that can be found by running `docker network ls`.
 
+When you are finished, run `docker compose down` to stop and remove all the containers.
+
 
 ## Spark
 
