@@ -75,6 +75,8 @@ To pull and start the different containers, run:
   docker compose up -d
 ```
 
+The different images will be downloaded from the Docker Hub, installed on your machine and started.
+
 `docker compose` creates a docker network (and a Spark network) that can be found by running `docker network ls`.
 
 
@@ -108,15 +110,23 @@ To exit the shell you can press CTRL+C and to exit the bash you just have to wri
 
 We are using the Kafka containers created by Confluent, more info about them <a href="https://docs.confluent.io/platform/current/installation/docker/installation.html">here</a>.
 
-To connect to kafka
+To connect to kafka, get into the container's bash
+```
+  docker exec -it kafka bash
+```
+
+From here you can use the usual kafka commands such as `kafka-topics`. The server you need to connect to is `localhost:29092`.
+
+Here is an example where we create a topic called "foo" and send it a "Hello world":
+
+
 
 
 ## Jupyter
 
 We are using the official Jupyter containers, more info about them can be found <a href="https://jupyter-docker-stacks.readthedocs.io/en/latest/">here</a>.
 
-After doing the compose command, if you want to use Jupyter you need to get into the logs of the container:
-
+After doing the compose command, to connect to Jupyter you need to wait for a bit (so the program sets up completely) and then get into the logs of the container:
 ```
   docker logs jupyter
 ```
@@ -131,7 +141,6 @@ Just CTRL+click one of the links and you will be sent to jupyter lab.
 ## Trino
 
 In order to use the Trino CLI is enough with executing the command:
-
 ```
   docker exec -it trino trino
 ```
