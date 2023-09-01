@@ -4,13 +4,72 @@ This is a Docker multi-container environment with Spark, Kafka, Trino and Jupyte
 
 
 ## Docker installation
+### Set up the apt repository
 
+Firstly, update the `apt` package index and install packages to allow `apt` to use a repository over HTTPS:
 
+```
+  sudo apt-get update
+  sudo apt-get install ca-certificates curl gnupg
+```
+
+Add Docker's official GPG key:
+
+```
+  sudo install -m 0755 -d /etc/apt/keyrings
+  curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
+  sudo chmod a+r /etc/apt/keyrings/docker.gpg
+```
+
+Use the following command to set up the repository
+
+```
+  echo \ "deb [arch="$(dpkg --print-architecture)" signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu \ "$(. /etc/os-release && echo "$VERSION_CODENAME")" stable" | \sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+```
+
+And finally, update again the `apt` package index:
+
+```
+  sudo apt-get update
+```
+### Install Docker Engine
+
+To install the latest version, run:
+```
+  sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+```
+
+Verify that the Docker Engine installation is succesful by running the `hello-world` image:
+```
+  sudo docker run hello-world
+```
+### Manage Docker as a non-root user
+
+Create the `docker` group
+
+```
+  sudo groupadd docker
+```
+
+Add your user to the `docker` group
+```
+  sudo usermod -aG docker $USER
+```
+
+Run the following command to activate the changes to groups;
+```
+  newgrp docker
+```
+
+Verify that you can run `docker` commands without `sudo`.
+```
+  docker run hello-world
+```
 
 
 ## Quick Start
 
-To deploy and start the different containers, run:
+To pull and start the different containers, run:
 
 ```
   docker compose up -d
@@ -21,7 +80,7 @@ To deploy and start the different containers, run:
 
 ## Spark
 
-We are using the containers created by sdesilva26, more info about them can be found <a href="https://github.com/sdesilva26/docker-spark/blob/master/TUTORIAL.md">here</a>.
+We are using the containers created by sdesilva26, more info about them <a href="https://github.com/sdesilva26/docker-spark/blob/master/TUTORIAL.md">here</a>.
 
 To use Spark, you need to enter into the container used to submit changes to our worker.
 
@@ -45,7 +104,16 @@ You can now run any jobs you want and they will appear in <a href="http://localh
 To exit the shell you can press CTRL+C and to exit the bash you just have to write `exit`.
 
 
+## Kafka
+
+We are using the Kafka containers created by Confluent, more info about them <a href="https://docs.confluent.io/platform/current/installation/docker/installation.html">here</a>.
+
+To connect to kafka
+
+
 ## Jupyter
+
+We are using the official Jupyter containers, more info about them can be found <a href="https://jupyter-docker-stacks.readthedocs.io/en/latest/">here</a>.
 
 After doing the compose command, if you want to use Jupyter you need to get into the logs of the container:
 
